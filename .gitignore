@@ -9,4 +9,5 @@
 *.dylib
 main
 .vscode
+.vs
 
