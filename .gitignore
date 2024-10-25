@@ -9,5 +9,7 @@
 *.dylib
 main
 .vscode
+.vs/Programming-Fundamentals/v17/.wsuo
+.vs/Programming-Fundamentals/v17/DocumentLayout.json
 .vs
 
