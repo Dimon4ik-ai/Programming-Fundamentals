@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+bool isValidSequence(const string& input) {
+    int n = input.size();
+
+    // Перевірка початкового символу: обов'язково '+' або '-'
+    if (n < 3 || (input[0] != '+' && input[0] != '-')) {
+        return false;
+    }
+
+    int i = 1; // Починаємо з другого символу
+
+    // Перевірка послідовності "3..9"
+    if (input[i] < '3' || input[i] > '9') {
+        return false;
+    }
+    i++;
+
+    // Перевірка можливих символів "J..Z" (за необхідності)
+    while (i < n - 1 && (input[i] >= 'J' && input[i] <= 'Z')) {
+        i++;
+    }
+
+    // Перевірка останнього символу: обов'язково '+'
+    if (input[i] != '+') {
+        return false;
+    }
+
+    // Якщо всі умови виконано, ланцюжок є валідним
+    return i == n - 1;
+}
+
+int main() {
+    string input;
+
+    cout << "Введіть ланцюжок: ";
+    cin >> input;
+
+    if (isValidSequence(input)) {
+        cout << "Ланцюжок належить L(V)." << endl;
+    }
+    else {
+        cout << "Ланцюжок НЕ належить L(V)." << endl;
+    }
+
+    return 0;
+}
