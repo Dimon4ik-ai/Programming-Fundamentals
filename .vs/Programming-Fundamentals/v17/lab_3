@@ -1,0 +1,42 @@
+using System;
+using SquareLibrary;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Дослідження перевантаження операцій для класу Square\n");
+
+        // 1. Створення трьох об'єктів K1, K2, K3 з різними конструкторами
+        Square K1 = new Square();       // Конструктор за замовчуванням (сторона = 1)
+        Square K2 = new Square(4);      // Конструктор з параметром (сторона = 4)
+        Square K3 = new Square(K2);     // Конструктор копіювання (копія K2)
+
+        // 2. Виведення початкових об'єктів
+        DisplaySquare("K1", K1);
+        DisplaySquare("K2", K2);
+        DisplaySquare("K3", K3);
+
+        // 3. Збільшення K3 на 5 одиниць (додавання нового квадрата)
+        Square K3_new = K3 + new Square(5);
+        Console.WriteLine("\nПісля збільшення K3 на 5 одиниць:");
+        DisplaySquare("K3 (новий)", K3_new);
+
+        // 4. Поділ K2 на K3 і збереження результату у K1
+        Square K1_new = K2 / K3;
+        Console.WriteLine("\nРезультат K1 = K2 / K3:");
+        DisplaySquare("K1 (новий)", K1_new);
+
+        // 5. Додавання кількох квадратів
+        Square K_total = Square.AddMultiple(K1, K2, K3);
+        Console.WriteLine("\nРезультат додавання всіх квадратів:");
+        DisplaySquare("K_total", K_total);
+    }
+
+   
+    // Відображає інформацію про квадрат.
+    static void DisplaySquare(string name, Square s)
+    {
+        Console.WriteLine($"{name}: {s}");
+    }
+}
