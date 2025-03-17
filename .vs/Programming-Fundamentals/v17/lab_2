@@ -1,0 +1,67 @@
+using System;
+using VectorLibrary;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Демонстрація роботи з векторами:");
+
+        // Використання різних конструкторів
+        Vector defaultVector = new Vector();         // Вектор (0,0)
+        Vector xOnlyVector = new Vector(5);         // Вектор (5,0)
+        Vector fullVector = new Vector(3, 4);       // Вектор (3,4)
+        Vector copiedVector = new Vector(fullVector); // Копія вектора (3,4)
+
+        // Виведення інформації про вектори
+        DisplayVector("Вектор за замовчуванням", defaultVector);
+        DisplayVector("Вектор тільки з X", xOnlyVector);
+        DisplayVector("Вектор з X та Y", fullVector);
+        DisplayVector("Копія вектора", copiedVector);
+
+        // Створення вектора з введених користувачем значень
+        Vector userVector = CreateVectorFromInput();
+        DisplayVector("Користувацький вектор", userVector);
+    }
+
+    /// <summary>
+    /// Відображає інформацію про вектор.
+    /// </summary>
+    static void DisplayVector(string name, Vector v)
+    {
+        Console.WriteLine($"\n{name}:");
+        Console.WriteLine($"Координати: ({v.X}, {v.Y})");
+        Console.WriteLine($"Довжина: {v.GetMagnitude():F2}");
+        Console.WriteLine($"Кут (радіани): {v.GetAngleRadians():F2}");
+        Console.WriteLine($"Кут (градуси): {v.GetAngleDegrees():F2}");
+    }
+
+    /// <summary>
+    /// Створює вектор з введених користувачем координат.
+    /// </summary>
+    static Vector CreateVectorFromInput()
+    {
+        Console.Write("\nВведіть X: ");
+        double x = ReadDoubleFromConsole();
+
+        Console.Write("Введіть Y: ");
+        double y = ReadDoubleFromConsole();
+
+        return new Vector(x, y);
+    }
+
+    /// <summary>
+    /// Зчитує число з консолі, обробляючи помилки введення.
+    /// </summary>
+    static double ReadDoubleFromConsole()
+    {
+        while (true)
+        {
+            if (double.TryParse(Console.ReadLine(), out double result))
+            {
+                return result;
+            }
+            Console.WriteLine("Помилка! Введіть коректне число:");
+        }
+    }
+}
