@@ -1,0 +1,49 @@
+using System; //дозволяє використовувати стандартні класи.NET Console.WriteLine(), Math.Sqrt()
+using System.Globalization;
+
+class Vector
+{
+    public double X{ get; private set; }//get  означає що ми можемо читати значення X і Y.
+    public double Y{ get; private set; }//private set означає, що ми можемо присвоїти значення тільки в межах класу
+
+        public Vector(double x, double y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    public double GetMagnitude()
+    {
+        return Math.Sqrt(X * X + Y * Y);//Math.Sqrt() – знаходить квадратний корінь
+    }
+
+    public double GetAngle()//GetAngle() Oбчислює кут вектора відносно осі X у градусах
+    {
+        return Math.Atan2(Y, X) * (180 / Math.PI);//який визначає кут залежно від квадранта 
+        // 180 / Math.PI) – конвертує кут із радіан у градуси
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введіть координати кінця вектора (X Y): ");
+        string[] input = Console.ReadLine().Split();//.Split() – розбиває введений рядок на частини (наприклад, рядок "3 4" стає масивом ["3", "4"]).
+
+        try
+        {
+            double x = double.Parse(input[0], CultureInfo.InvariantCulture);
+            double y = double.Parse(input[1], CultureInfo.InvariantCulture);
+
+            Vector vector = new Vector(x, y);
+
+            Console.WriteLine($"Модуль вектора: {vector.GetMagnitude():F2}");
+            Console.WriteLine($"Кут (у градусах): {vector.GetAngle():F2}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Помилка введення: {ex.Message}");
+        }
+    }
+}
